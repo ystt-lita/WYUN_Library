@@ -2,10 +2,10 @@ namespace WYUN
 {
     public class AppSettings
     {
-        public string ip { get; set; }
-        public int port { get; set; }
-        public long appID { get; set; }
-        public string userName { get; set; }
+        public string ip { get; private set; }
+        public int port { get; private set; }
+        public long appID { get; private set; }
+        public string userName { get; private set; }
 
         public AppSettings(string ip_port, long id, string name)
         {
