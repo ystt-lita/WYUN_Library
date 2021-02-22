@@ -182,7 +182,7 @@ namespace WYUN
         public static void Connect(AppSettings s)
         {
             settings = s;
-            IPHostEntry ipInfo = Dns.GetHostEntry(Dns.GetHostAddresses(s.server)[0]);
+            IPHostEntry ipInfo = Dns.GetHostEntry(Dns.GetHostAddresses(s.ip)[0]);
             server = new Socket(ipInfo.AddressList[0].AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             server.Connect(ipInfo.AddressList[0], s.port);
             byte[] buff = new byte[1024]; server.Receive(buff);
