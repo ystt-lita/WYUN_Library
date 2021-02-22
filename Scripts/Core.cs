@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using Utf8Json;
 using Utf8Json.Resolvers;
+using System;
 
 namespace WYUN
 {
@@ -72,6 +73,7 @@ namespace WYUN
                             if (!state.inLobby)
                             {
                                 //サーバー側とステートがずれている
+                                throw new ApplicationException("didnt received joinedLobby but received roomList.");
                             }
                             foreach (ILobbyCallback e in lobbies)
                             {
@@ -89,6 +91,7 @@ namespace WYUN
                             if (!state.inLobby)
                             {
                                 //ずれてる
+                                throw new ApplicationException("didnt received joinedLobby but received lobbyMember.");
                             }
                             foreach (ILobbyCallback e in lobbies)
                             {
@@ -108,6 +111,7 @@ namespace WYUN
                             if (!state.inRoom)
                             {
                                 //ずれてる
+                                throw new ApplicationException("didnt received JoinedRoom but received roomOption.");
                             }
                             foreach (IRoomCallback e in rooms)
                             {
@@ -118,6 +122,7 @@ namespace WYUN
                             if (!state.inRoom)
                             {
                                 //ずれてる
+                                throw new ApplicationException("didnt received JoinedRoom but received roomMember.");
                             }
                             foreach (IRoomCallback e in rooms)
                             {
@@ -135,6 +140,7 @@ namespace WYUN
                             if (!state.inRoom)
                             {
                                 //ずれてる
+                                throw new ApplicationException("didnt received JoinedRoom but received tell.");
                             }
                             foreach (IRoomCallback e in rooms)
                             {
@@ -197,6 +203,7 @@ namespace WYUN
             if (!state.inLobby)
             {
                 //ロビーにいないのにルームに入ろうとしている
+                throw new ApplicationException("you are not in lobby but are trying to join room");
             }
             byte[] message = JsonSerializer.Serialize(new Queries.CreateQuery(name, limit, settings.userName, true));
             //string message = UnityEngine.JsonUtility.ToJson(new Queries.CreateQuery(name, limit, settings.userName)).ToString().Insert(1, "\"query\":\"create\",") + "\r\n";
@@ -208,6 +215,7 @@ namespace WYUN
             if (!state.inLobby)
             {
                 //ロビーにいない
+                throw new ApplicationException("you are not in lobby but are trying to join room");
             }
             byte[] message = JsonSerializer.Serialize(new Queries.JoinQuery(name, true));
             server.Send(message);
@@ -218,6 +226,7 @@ namespace WYUN
             if (!state.inLobby)
             {
                 //ロビーにいない
+                throw new ApplicationException("you are not in lobby but are trying to get roomList");
             }
             server.Send(Encoding.UTF8.GetBytes("{\"query\":\"roomList\"}\r\n"));
         }
@@ -226,6 +235,7 @@ namespace WYUN
             if (!state.inRoom)
             {
                 //ルームにいない
+                throw new ApplicationException("you are not in room but are trying to get current roomOption");
             }
             server.Send(Encoding.UTF8.GetBytes("{\"query\":\"roomOption\"}\r\n"));
         }
@@ -234,6 +244,7 @@ namespace WYUN
             if (!state.inRoom)
             {
                 //ルームにいない
+                throw new ApplicationException("you are not in room but are trying to get roomMember");
             }
             server.Send(Encoding.UTF8.GetBytes("{\"query\":\"roomMember\"}\r\n"));
         }
@@ -242,6 +253,7 @@ namespace WYUN
             if (!state.inRoom)
             {
                 //ルームにいない
+                throw new ApplicationException("you are not in room but are trying to leave room");
             }
             server.Send(Encoding.UTF8.GetBytes("{\"query\":\"leave\"}\r\n"));
         }
@@ -250,6 +262,7 @@ namespace WYUN
             if (!state.inRoom)
             {
                 //ルームにいない
+                throw new ApplicationException("you are not in room but are trying to tell others");
             }
             server.Send(Encoding.UTF8.GetBytes("{\"query\":\"tell\",\"to\":\"" + name + "\",\"body\":\"" + message + "\"}\r\n"));
         }
@@ -258,6 +271,7 @@ namespace WYUN
             if (!state.inRoom)
             {
                 //ルームにいない
+                throw new ApplicationException("you are not in room but are trying to tell others");
             }
             server.Send(Encoding.UTF8.GetBytes("{\"query\":\"broad\",\"body\":\"" + message + "\"}\r\n"));
         }
