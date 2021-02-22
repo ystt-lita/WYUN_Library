@@ -40,7 +40,7 @@ public void MessageReceived(string message){
 ## 注意事項
 [`ILobbyCallback`](../../wiki/WYUN.ILobbyCallback)、[`IRoomCallback`](../../wiki/WYUN.IRoomCallback)で実装されるインターフェイス関数はすべてメインスレッド以外のスレッドから実行されています。  
 `GameObject`の内部状態を変えるような操作は基本的にメインスレッドからのみ行えるため、適切にメインスレッドに処理を委譲する必要があります。  
-回避策の一部は`Samples`のコードに実装されているので参考にしてください。
+回避策の一部は[`Samples`](https://github.com/ystt-lita/WYUN_SampleProjects)のコードに実装されているので参考にしてください。
 
 ## ライセンス
 MIT
