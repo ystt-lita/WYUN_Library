@@ -17,6 +17,7 @@ namespace WYUN.Queries
                 query = null;
             }
         }
+        public CreateQuery(){};
         public string query;
         public string name;
         public long limit;
