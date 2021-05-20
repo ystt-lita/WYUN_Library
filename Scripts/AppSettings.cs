@@ -9,17 +9,17 @@ namespace WYUN
 
         public AppSettings(string ip_port, long id, string name)
         {
-            ip = ip_port.Split(':')[0];
-            port = int.Parse(ip_port.Split(':')[1]);
-            appID = id;
-            userName = name;
+            this.ip = ip_port.Split(':')[0];
+            this.port = int.Parse(ip_port.Split(':')[1]);
+            this.appID = id;
+            this.userName = name;
         }
         public AppSettings(string ip, int p, long id, string name)
         {
-            ip = ip;
-            port = p;
-            appID = id;
-            userName = name;
+            this.ip = ip;
+            this.port = p;
+            this.appID = id;
+            this.userName = name;
         }
     }
 }
